@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 设置变量
-REPO_URI="https://github.com/acblbtpccc/health-container.git"
+REPO_URI="https://github.com/acblbtpccc/health-es-runner.git"
 ENV_FILE_URL="http://cdn.1f2.net/auth/health/.env"
 LOCAL_ENV_FILE=".env"
 COMPOSE_FILE="docker-compose.yml"
