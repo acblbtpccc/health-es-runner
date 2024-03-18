@@ -16,7 +16,7 @@ do
     case "${flag}" in
         u) CURL_USER=${OPTARG};;
         p) CURL_PASSWORD=${OPTARG};;
-	    h) HOST_PREFIX=${OPTARG};;
+        h) HOST_PREFIX=${OPTARG};;
         s) SHOULD_APPEND_HOSTIP=true;;
     esac
 done
