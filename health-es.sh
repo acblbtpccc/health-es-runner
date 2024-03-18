@@ -11,13 +11,13 @@ HOST_PREFIX=""
 SHOULD_APPEND_HOSTIP=false
 
 # 从命令行参数中获取用户名和密码
-while getopts u:p:h: flag
+while getopts h:p:s:u: flag
 do
     case "${flag}" in
-        u) CURL_USER=${OPTARG};;
-        p) CURL_PASSWORD=${OPTARG};;
         h) HOST_PREFIX=${OPTARG};;
+        p) CURL_PASSWORD=${OPTARG};;
         s) SHOULD_APPEND_HOSTIP=true;;
+        u) CURL_USER=${OPTARG};;
     esac
 done
 
