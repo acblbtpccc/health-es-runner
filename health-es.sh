@@ -80,12 +80,13 @@ if ! grep -q "ES_API_KEY" "$LOCAL_ENV_FILE"; then
 fi
 
 HOST_IP=$(curl -s 4.ipw.cn)
+FORMATTED_HOST_IP=$(echo $HOST_IP | sed 's/\./-/g')
 CURRENT_DATE=$(date +%Y%m%d)
 UUID_HASH=$(cat /proc/sys/kernel/random/uuid | sha256sum | head -c 12)
 
 # 如果设置了拼接hostip标志，则获取外网 IP 地址并拼接
 if $SHOULD_APPEND_HOSTIP; then
-    COMBINED_HOSTNAME="${HOST_PREFIX}-${HOST_IP}-${CURRENT_DATE}-${UUID_HASH}"
+    COMBINED_HOSTNAME="${HOST_PREFIX}-${FORMATTED_HOST_IP}-${CURRENT_DATE}-${UUID_HASH}"
 else
     COMBINED_HOSTNAME="${HOST_PREFIX}-${CURRENT_DATE}-${UUID_HASH}"
 fi
