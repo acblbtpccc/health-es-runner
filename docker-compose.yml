@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:8.12.2
+    user: root
+    volumes:
+      - /proc:/hostfs/proc:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro
+      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+    environment:
+      - ES_HOSTS=${ES_HOSTS}
+      - KIBANA_HOST=${KIBANA_HOST}
+      - ES_API_KEY=${ES_API_KEY}
+    command:
+      - "--strict.perms=false"
+      - "-system.hostfs=/hostfs"
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.12.2
+    user: root
+    volumes:
+      - /var/log:/var/log
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+    environment:
+      - ES_HOSTS=${ES_HOSTS}
+      - KIBANA_HOST=${KIBANA_HOST}
+      - ES_API_KEY=${ES_API_KEY}

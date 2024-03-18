@@ -1,0 +1,18 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/dmesg
+    - /var/log/auth.log
+
+output.elasticsearch:
+  hosts: ["${ES_HOSTS}"]
+  api_key: "${ES_API_KEY}"
+  ssl.verification_mode: none
+
+setup.kibana:
+  host: "${KIBANA_HOST}"
+  api_key: "${ES_API_KEY}"
+  ssl.verification_mode: none
+
+setup.dashboards.enabled: true
