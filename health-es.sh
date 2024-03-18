@@ -11,7 +11,7 @@ HOST_PREFIX=""
 SHOULD_APPEND_HOSTIP=false
 
 # 从命令行参数中获取用户名和密码
-while getopts h:p:s:u: flag
+while getopts h:p:u:s flag
 do
     case "${flag}" in
         h) HOST_PREFIX=${OPTARG};;
