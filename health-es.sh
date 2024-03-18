@@ -90,6 +90,9 @@ else
     COMBINED_HOSTNAME="${HOST_PREFIX}-${CURRENT_DATE}-${UUID_HASH}"
 fi
 
+echo "INFO:COMBINED_HOSTNAME: $COMBINED_HOSTNAME"
+sed -i "s/^COMBINED_HOSTNAME=.*/COMBINED_HOSTNAME=${COMBINED_HOSTNAME}/" .env
+
 # 使用docker-compose启动服务
 docker compose up -d
 
