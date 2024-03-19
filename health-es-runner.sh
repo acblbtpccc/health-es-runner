@@ -53,7 +53,7 @@ fi
 if [ "$SHOULD_RELOAD" = true ]; then
     # 检查是否存在health-container目录，如果存在则删除
     if [ -d "health-es-runner" ]; then
-        echo "INFO: removing elder health-es-runner... "
+        echo "INFO: SHOULD_RELOAD is true, removing elder health-es-runner... "
         rm -rf health-es-runner
     fi
     # 使用HTTP克隆GitHub仓库
