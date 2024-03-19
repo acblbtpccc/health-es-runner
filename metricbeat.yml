@@ -15,9 +15,6 @@ metricbeat.modules:
   period: 5s
   enabled: true
 
-processors:
-  - add_cloud_metadata: ~
-
 logging.level: info
 logging.to_files: false
 logging.to_syslog: false
