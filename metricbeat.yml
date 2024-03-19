@@ -4,16 +4,13 @@ metricbeat.config.modules:
 
 metricbeat.modules:
 - module: system
-  metricsets:
-    - "cpu"
-    - "memory"
-    - "diskio"
-    - "memory"
-    - "network"
-    - "process"
-    - "process_summary"
+  metricsets: ["cpu", "load", "filesystem", "fsstat", "memory", "network", "process", "core", "diskio", "socket"]
   period: 5s
   enabled: true
+  processes: ['.*']
+
+  cpu.metrics:  ["percentages"]
+  core.metrics: ["percentages"]
 
 logging.level: info
 logging.to_files: false
