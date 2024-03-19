@@ -3,6 +3,7 @@ services:
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:8.12.2
     user: root
+    network_mode: host
     hostname: ${COMBINED_HOSTNAME}
     volumes:
       - /var/run/dbus/system_bus_socket:/hostfs/var/run/dbus/system_bus_socket:ro
