@@ -1,32 +1,22 @@
-version: '3.8'
+version: '3.7'
 services:
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:8.12.2
+    user: root
     hostname: ${COMBINED_HOSTNAME}
-    command: "-e -system.hostfs=/hostfs"
-    network_mode: host
+    volumes:
+      - /var/run/dbus/system_bus_socket:/hostfs/var/run/dbus/system_bus_socket:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - /proc:/hostfs/proc:ro
+      - /:/hostfs:ro
     environment:
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/hostfs/var/run/dbus/system_bus_socket
       - ES_HOSTS=${ES_HOSTS}
       - KIBANA_HOST=${KIBANA_HOST}
       - ES_API_KEY=${ES_API_KEY}
-    volumes:
-      - type: bind
-        source: /proc
-        target: /hostfs/proc
-        read_only: true
-      - type: bind
-        source: /sys/fs/cgroup
-        target: /hostfs/sys/fs/cgroup
-        read_only: true
-      - type: bind
-        source: /
-        target: /hostfs
-        read_only: true
-      - type: bind
-        source: /var/run/dbus/system_bus_socket
-        target: /hostfs/var/run/dbus/system_bus_socket
-        read_only: true  
+    command: "-e -system.hostfs=/hostfs"
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:8.12.2
