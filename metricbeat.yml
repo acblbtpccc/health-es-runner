@@ -8,7 +8,7 @@ metricbeat.autodiscover:
       hints.enabled: true
 
 metricbeat.modules:
-- module: docker
+- module: system
   metricsets:
     - "container"
     - "cpu"
