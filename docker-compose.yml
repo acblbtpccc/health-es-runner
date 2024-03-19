@@ -3,6 +3,7 @@ services:
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:8.12.2
     user: root
+    privileged: true
     network_mode: host
     hostname: ${COMBINED_HOSTNAME}
     volumes:
