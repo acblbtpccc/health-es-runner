@@ -49,14 +49,14 @@ fi
 
 
 # 检查是否存在health-container目录，如果存在则删除
-if [ -d "health-container" ]; then
-    echo "INFO: removing elder health-container... "
-    rm -rf health-container
+if [ -d "health-es-runner" ]; then
+    echo "INFO: removing elder health-es-runner... "
+    rm -rf health-es-runner
 fi
 
 # 使用HTTP克隆GitHub仓库
 git clone $REPO_URI
-cd health-container
+cd health-es-runner
 
 # 检查是否存在docker-compose.yml文件
 if [ ! -f "$COMPOSE_FILE" ]; then
