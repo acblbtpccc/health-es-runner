@@ -1,38 +1,19 @@
 metricbeat.config.modules:
   path: ${path.config}/modules.d/*.yml
-  reload.enabled: false
-
-metricbeat.autodiscover:
-  providers:
-    - type: docker
-      hints.enabled: true
-
+  reload.enabled: true
 
 metricbeat.modules:
 - module: system
   metricsets:
-    - "container"
     - "cpu"
+    - "memory"
     - "diskio"
-    - "healthcheck"
-    - "info"
     - "memory"
     - "network"
+    - "process"
+    - "process_summary"
   period: 5s
   enabled: true
-
-- module: docker
-  period: 10s
-  metricsets:
-    - container
-    - cpu
-    - diskio
-    - memory
-    - network
-    - load
-    - process
-    - process_summary
-  hosts: ["unix:///var/run/docker.sock"]
 
 processors:
   - add_cloud_metadata: ~
