@@ -14,9 +14,7 @@ services:
       - ES_HOSTS=${ES_HOSTS}
       - KIBANA_HOST=${KIBANA_HOST}
       - ES_API_KEY=${ES_API_KEY}
-    command:
-      - "--strict.perms=false"
-      - "-system.hostfs=/hostfs"
+    command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:8.12.2
