@@ -9,12 +9,14 @@ CURL_USER=""
 CURL_PASSWORD=""
 HOST_PREFIX=""
 SHOULD_APPEND_HOSTIP=false
+SHOULD_RELOAD=true
 
 # 从命令行参数中获取用户名和密码
-while getopts h:p:u:s flag
+while getopts h:p:u:ns flag
 do
     case "${flag}" in
         h) HOST_PREFIX=${OPTARG};;
+        n) SHOULD_RELOAD=false;;
         p) CURL_PASSWORD=${OPTARG};;
         s) SHOULD_APPEND_HOSTIP=true;;
         u) CURL_USER=${OPTARG};;
@@ -47,15 +49,17 @@ if ! command -v curl &> /dev/null; then
     fi
 fi
 
-
-# 检查是否存在health-container目录，如果存在则删除
-if [ -d "health-es-runner" ]; then
-    echo "INFO: removing elder health-es-runner... "
-    rm -rf health-es-runner
+# 使用 $SHOULD_RELOAD 变量来决定是否执行重载逻辑
+if [ "$SHOULD_RELOAD" = true ]; then
+    # 检查是否存在health-container目录，如果存在则删除
+    if [ -d "health-es-runner" ]; then
+        echo "INFO: removing elder health-es-runner... "
+        rm -rf health-es-runner
+    fi
+    # 使用HTTP克隆GitHub仓库
+    git clone $REPO_URI
 fi
 
-# 使用HTTP克隆GitHub仓库
-git clone $REPO_URI
 cd health-es-runner
 
 # 检查是否存在docker-compose.yml文件
