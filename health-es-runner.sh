@@ -98,4 +98,4 @@ sed -i "s/^COMBINED_HOSTNAME=.*/COMBINED_HOSTNAME=${COMBINED_HOSTNAME}/" .env
 docker compose up -d
 
 # 结束脚本
-echo "INFO: Health container started."
+echo "INFO: health-es-runner started."
