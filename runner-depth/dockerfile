@@ -1,0 +1,17 @@
+FROM nvcr.io/nvidia/l4t-tensorrt:r8.4.1-runtime
+
+# setting the timezone
+ENV TZ=Asia/Hong_Kong
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# we still need opencv to run the darknet
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libopencv-dev \
+    python3-opencv \
+    usbutils
+
+RUN pip install keyboard
+
+WORKDIR /health-es-runner
+
+EXPOSE 18101 18201
