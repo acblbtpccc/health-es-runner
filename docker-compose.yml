@@ -30,31 +30,31 @@ services:
       - KIBANA_HOST=${KIBANA_HOST}
       - ES_API_KEY=${ES_API_KEY}
 
-  runner-depth: 
-    image:
-      health-es-runner:latest
-    env_file:
-      - ./runner-depth/.env
-    volumes:
-      - 'runner-depth-data01:/mnt/ssd/data/depth'
-      - './runner-depth:/health-es-runner/runner-depth/'
-    privileged: true
-    ports:
-      - "18101:18101"
-      - "18201:18201"
-    devices:
-      - "/dev/bus/usb/"
-    restart: always
-    command: tail -f /dev/null
+  # runner-depth: 
+  #   image:
+  #     health-es-runner:latest
+  #   env_file:
+  #     - ./runner-depth/.env
+  #   volumes:
+  #     - 'runner-depth-data01:/mnt/ssd/data/depth'
+  #     - './runner-depth:/health-es-runner/runner-depth/'
+  #   privileged: true
+  #   ports:
+  #     - "18101:18101"
+  #     - "18201:18201"
+  #   devices:
+  #     - "/dev/bus/usb/"
+  #   restart: always
+  #   command: tail -f /dev/null
 
-  runner-portainer:
-    image: portainer/portainer-ce:latest
-    ports:
-      - "18005:9000" 
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock" 
-      - "runner-portainer-data:/data" 
-    restart: always
+  # runner-portainer:
+  #   image: portainer/portainer-ce:latest
+  #   ports:
+  #     - "18005:9000" 
+  #   volumes:
+  #     - "/var/run/docker.sock:/var/run/docker.sock" 
+  #     - "runner-portainer-data:/data" 
+  #   restart: always
 
 volumes:
   runner-depth-data01:
